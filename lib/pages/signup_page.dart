@@ -25,7 +25,7 @@ class _SignupPageState extends State<SignupPage> {
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 fontSize: 24,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w900,
                 color: Colors.blueAccent,
               ),
             ),
@@ -91,10 +91,14 @@ class _SignupPageState extends State<SignupPage> {
                           _isChecked = value ?? false;
                         });
                       },
+                      activeColor: Colors.blue,
                       checkColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                     ),
                     Text(
-                      "I agree to the processing of personal data",
+                      "I agree to the processing of \n Personal data",
                       style: GoogleFonts.lato(
                         fontSize: 16,
                         color: Colors.grey,
@@ -102,16 +106,6 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ],
-                ),
-                GestureDetector(
-                  child: Text(
-                    "Forget password?",
-                    style: GoogleFonts.lato(
-                      fontSize: 16,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -125,14 +119,12 @@ class _SignupPageState extends State<SignupPage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
+              onPressed: () {},
               child: Text(
                 'Sign up',
                 style: GoogleFonts.lato(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
@@ -205,7 +197,7 @@ class _SignupPageState extends State<SignupPage> {
                     style: GoogleFonts.lato(
                       fontSize: 16,
                       color: Colors.blue,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),

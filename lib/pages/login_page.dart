@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 fontSize: 24,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w900,
                 color: Colors.blueAccent,
               ),
             ),
@@ -77,7 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                           _isChecked = value ?? false;
                         });
                       },
+                      activeColor: Colors.blue,
                       checkColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                     ),
                     Text(
                       "Remember me",
@@ -118,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in',
                 style: GoogleFonts.lato(
                   fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
@@ -191,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: GoogleFonts.lato(
                       fontSize: 16,
                       color: Colors.blue,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
