@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    super.key,
+    super.key, required this.text, required this.onPressed,
   });
+  final String text;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +18,9 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      onPressed: () {
-        Navigator.pushNamed(context, '/home');
-      },
+      onPressed: onPressed,
       child: Text(
-        'Sign in',
+        text,
         style: GoogleFonts.lato(
           fontSize: 18,
           fontWeight: FontWeight.w800,

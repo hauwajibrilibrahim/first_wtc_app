@@ -1,3 +1,7 @@
+import 'package:first_app/widgets/custom_button.dart';
+import 'package:first_app/widgets/custom_textfield.dart';
+import 'package:first_app/widgets/password_textfield.dart';
+import 'package:first_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,186 +14,143 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   bool _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    //final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: Stack(
           children: [
-            SizedBox(height: 120),
-            Text(
-              "Get Started",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.lato(
-                fontSize: 24,
-                fontWeight: FontWeight.w900,
-                color: Colors.blueAccent,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              "Register below with your details!",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.lato(fontSize: 16),
-            ),
-            SizedBox(height: 32),
-            TextField(
-              decoration: InputDecoration(
-                labelStyle: GoogleFonts.lato(
-                  fontSize: 14,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w700,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                labelText: 'Full Name',
-              ),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              decoration: InputDecoration(
-                labelStyle: GoogleFonts.lato(
-                  fontSize: 14,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w700,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                labelText: 'Email',
-              ),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              decoration: InputDecoration(
-                labelStyle: GoogleFonts.lato(
-                  fontSize: 14,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w700,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      value: _isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _isChecked = value ?? false;
-                        });
-                      },
-                      activeColor: Colors.blue,
-                      checkColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    Text(
-                      "I agree to the processing of \n Personal data",
-                      style: GoogleFonts.lato(
-                        fontSize: 16,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 26),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                fixedSize: Size(400, 55),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Sign up',
-                style: GoogleFonts.lato(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
+            Container(
+              height: screenHeight * 0.4,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/login_bgimage.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(height: 24),
-            Row(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(child: Divider(color: Colors.grey)),
-                Text(
-                  'Sign up with',
-                  style: GoogleFonts.lato(
-                    fontSize: 16,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w700,
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: screenHeight * 0.8,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                 ),
-                Expanded(child: Divider(color: Colors.grey)),
-              ],
-            ),
-            SizedBox(height: 36),
-            Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: 
-                        [
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset('assets/google.png', width: 50, height: 50),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 30,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Get Started",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.lato(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "Register below with your details!",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.lato(fontSize: 16),
+                      ),
+                      const SizedBox(height: 32),
+                      CustomTextField(label: 'Username'),
+                      const SizedBox(height: 16),
+                      CustomTextField(label: 'Email'),
+                      const SizedBox(height: 16),
+                      PasswordTextField(),
+                      const SizedBox(height: 16),
+                      PasswordTextField(),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: _isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                _isChecked = value ?? false;
+                              });
+                            },
+                            activeColor: Colors.blue,
+                            checkColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset('assets/fb.png', width: 50, height: 50),
+                          Text(
+                            "I agree to the processing of \n Personal data",
+                            style: GoogleFonts.lato(
+                              fontSize: 16,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset('assets/x.png', width: 50, height: 50),
-                          )
                         ],
                       ),
-            SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 3,
-              children: [
-                Text(
-                  "Already have an account?",
-                  style: GoogleFonts.lato(
-                    fontSize: 16,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w700,
+                      const SizedBox(height: 26),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 55,
+                        child: CustomButton(
+                          text: 'Sign up',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/home');
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      SocialSignIn(),
+                      const SizedBox(height: 24),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 3,
+                        children: [
+                          Text(
+                            "Already have an account?",
+                            style: GoogleFonts.lato(
+                              fontSize: 16,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacementNamed(context, '/login');
+                            },
+                            child: Text(
+                              "Sign in",
+                              style: GoogleFonts.lato(
+                                fontSize: 16,
+                                color: Colors.blue,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                    ],
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, '/login');
-                  },
-                  child: Text(
-                    "Sign in",
-                    style: GoogleFonts.lato(
-                      fontSize: 16,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),

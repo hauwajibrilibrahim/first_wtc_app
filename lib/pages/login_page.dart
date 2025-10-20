@@ -1,6 +1,7 @@
 import 'package:first_app/widgets/custom_button.dart';
 import 'package:first_app/widgets/custom_textfield.dart';
 import 'package:first_app/widgets/password_textfield.dart';
+import 'package:first_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: screenHeight * 0.7, 
+                height: screenHeight * 0.7,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -48,7 +49,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 30,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -71,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      CustomTextField(),
+                      CustomTextField(label: 'Email'),
                       const SizedBox(height: 16),
                       PasswordTextField(),
                       const SizedBox(height: 16),
@@ -118,45 +122,15 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: double.infinity,
                         height: 55,
-                        child: CustomButton(),
+                        child: CustomButton(
+                          text: 'Sign in',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/home');
+                          },
+                        ),
                       ),
                       const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          const Expanded(child: Divider(color: Colors.grey)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              'Sign up with',
-                              style: GoogleFonts.lato(
-                                fontSize: 16,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          const Expanded(child: Divider(color: Colors.grey)),
-                        ],
-                      ),
-                      const SizedBox(height: 36),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: 
-                        [
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset('assets/google.png', width: 50, height: 50),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset('assets/fb.png', width: 50, height: 50),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Image.asset('assets/x.png', width: 50, height: 50),
-                          )
-                        ],
-                      ),
+                      SocialSignIn(),
                       const SizedBox(height: 24),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +146,10 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(width: 6),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacementNamed(context, '/signup');
+                              Navigator.pushReplacementNamed(
+                                context,
+                                '/signup',
+                              );
                             },
                             child: Text(
                               "Sign up",
@@ -197,4 +174,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
