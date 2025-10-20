@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignupPage extends StatefulWidget {
@@ -147,34 +146,23 @@ class _SignupPageState extends State<SignupPage> {
             ),
             SizedBox(height: 36),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  icon: FaIcon(
-                    FontAwesomeIcons.google,
-                    size: 36,
-                    color: Color(0xFFDB4437),
-                  ),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: FaIcon(
-                    FontAwesomeIcons.apple,
-                    size: 36,
-                    color: Color(0xFF000000),
-                  ),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: FaIcon(
-                    FontAwesomeIcons.facebook,
-                    size: 36,
-                    color: Color(0xFF1877F2),
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: 
+                        [
+                          InkWell(
+                            onTap: () {},
+                            child: Image.asset('assets/google.png', width: 50, height: 50),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Image.asset('assets/fb.png', width: 50, height: 50),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Image.asset('assets/x.png', width: 50, height: 50),
+                          )
+                        ],
+                      ),
             SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
