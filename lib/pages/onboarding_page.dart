@@ -66,103 +66,122 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              onPageChanged: (int index) {
-                setState(() => _activeIndex = index);
-              },
-              itemCount: _pages.length,
-              itemBuilder: (_, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    spacing: 16,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Page indicators
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          _pages.length,
-                          (index) => _buildIndicator(index),
-                        ),
-                      ),
-                      Image.asset(_pages[index]["image"]!, height: 250),
-                      const SizedBox(height: 40),
-                      Text(
-                        _pages[index]["title"]!,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.aDLaMDisplay(
-                          fontSize: 32,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Text(
-                        _pages[index]["description"]!,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.k2d(
-                          fontSize: 18
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                if (_activeIndex > 0)
-                  Expanded(
-                    child: ElevatedButton(
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Skip button 
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (_activeIndex < _pages.length - 1)
+                    TextButton(
                       onPressed: () {
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
+                        Navigator.of(context).pushReplacementNamed("/login");
                       },
+                      child: const Text(
+                        "Skip",
+                        style: TextStyle(fontSize: 16, color: Colors.blue),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (int index) {
+                  setState(() => _activeIndex = index);
+                },
+                itemCount: _pages.length,
+                itemBuilder: (_, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Page indicators
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            _pages.length,
+                            (index) => _buildIndicator(index),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Image.asset(_pages[index]["image"]!, height: 250),
+                        const SizedBox(height: 40),
+                        Text(
+                          _pages[index]["title"]!,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.aDLaMDisplay(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        Text(
+                          _pages[index]["description"]!,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.k2d(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  if (_activeIndex > 0)
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _pageController.previousPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey.shade400,
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          "Back",
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  if (_activeIndex > 0) const SizedBox(width: 16),
+                  Expanded(
+                    flex: _activeIndex > 0 ? 2 : 1,
+                    child: ElevatedButton(
+                      onPressed: _onNextPressed,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade400,
+                        backgroundColor: Colors.blue,
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text(
-                        "Back",
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      child: Text(
+                        _activeIndex == _pages.length - 1 ? "Get Started" : "Next",
+                        style: const TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
                   ),
-                if (_activeIndex > 0) const SizedBox(width: 16),
-                Expanded(
-                  flex: _activeIndex > 0 ? 2 : 1,
-                  child: ElevatedButton(
-                    onPressed: _onNextPressed,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: Text(
-                      _activeIndex == _pages.length - 1 ? "Get Started" : "Next",
-                      style: const TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 40),
-        ],
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }
