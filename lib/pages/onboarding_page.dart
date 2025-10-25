@@ -80,9 +80,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       onPressed: () {
                         Navigator.of(context).pushReplacementNamed("/login");
                       },
-                      child: const Text(
+                      child: Text(
                         "Skip",
-                        style: TextStyle(fontSize: 16, color: Colors.blue),
+                        style: GoogleFonts.lato(fontSize: 18, color: Colors.blue, fontWeight: FontWeight.w600),
                       ),
                     ),
                 ],
@@ -110,7 +110,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           ),
                         ),
                         SizedBox(height: 20),
-                        Image.asset(_pages[index]["image"]!, height: 250),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            _pages[index]["image"]!,
+                            height: 300,
+                            width: 450,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         const SizedBox(height: 40),
                         Text(
                           _pages[index]["title"]!,

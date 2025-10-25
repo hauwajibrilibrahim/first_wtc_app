@@ -1,4 +1,6 @@
 import 'package:first_app/bottom_navigation.dart';
+import 'package:first_app/pages/contact_page.dart';
+import 'package:first_app/pages/forgot_password_page.dart';
 import 'package:first_app/pages/login_page.dart';
 import 'package:first_app/pages/onboarding_page.dart';
 import 'package:first_app/pages/signup_page.dart';
@@ -23,8 +25,11 @@ class MyApp extends StatelessWidget {
         '/': (context) => OnboardingPage(),
         '/home': (context) => BottomNavigation(),
         '/login':(context) => LoginPage(),
-        '/signup': (context) => SignupPage()
+        '/signup': (context) => SignupPage(),
+        '/contact': (context) => ContactPage(),
+        '/forgot': (context) => ForgotPasswordPage()
       },
+      initialRoute: '/',
     );
   }
 }

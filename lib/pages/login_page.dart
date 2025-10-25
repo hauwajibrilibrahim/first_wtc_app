@@ -14,6 +14,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isChecked = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "Welcome, been a while!",
+                        "Ready to assist you!",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.lato(
                           fontSize: 16,
@@ -75,9 +83,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      CustomTextField(label: 'Email'),
+                      CustomTextField(label: 'Email', textEditingController: emailController,),
                       const SizedBox(height: 16),
-                      PasswordTextField(),
+                      PasswordTextField(label: 'Password', textEditingController: passwordController,),
                       const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,7 +114,9 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushReplacementNamed(context, '/forgot');
+                            },
                             child: Text(
                               "Forget password?",
                               style: GoogleFonts.lato(
@@ -125,7 +135,15 @@ class _LoginPageState extends State<LoginPage> {
                         child: CustomButton(
                           text: 'Sign in',
                           onPressed: () {
-                            Navigator.pushNamed(context, '/home');
+                            if (emailController.text != 'jiddah@gmail.com') {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Not a valid email. Try again')));
+                              return;
+                            }
+                            if(passwordController.text != '123Tech') {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Not a valid password. Try again')));
+                              return;
+                            }
+                            Navigator.of(context).pushReplacementNamed('/home');
                           },
                         ),
                       ),

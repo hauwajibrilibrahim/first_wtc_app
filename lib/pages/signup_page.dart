@@ -7,14 +7,22 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
-
   @override
   State<SignupPage> createState() => _SignupPageState();
 }
 
 class _SignupPageState extends State<SignupPage> {
   bool _isChecked = false;
-
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -74,11 +82,11 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(height: 32),
                       CustomTextField(label: 'Username'),
                       const SizedBox(height: 16),
-                      CustomTextField(label: 'Email'),
+                      CustomTextField(label: 'Email', textEditingController: emailController,),
                       const SizedBox(height: 16),
-                      PasswordTextField(),
+                      PasswordTextField(label: 'Password', textEditingController: passwordController,),
                       const SizedBox(height: 16),
-                      PasswordTextField(),
+                      PasswordTextField(label: 'Confirm Password', textEditingController: confirmPasswordController,),
                       const SizedBox(height: 16),
                       Row(
                         children: [
@@ -112,7 +120,35 @@ class _SignupPageState extends State<SignupPage> {
                         child: CustomButton(
                           text: 'Sign up',
                           onPressed: () {
-                            Navigator.pushNamed(context, '/home');
+                            if (emailController.text != 'jiddah@gmail.com') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Not a valid email. Try again'),
+                                ),
+                              );
+                              return;
+                            }
+                            if (passwordController.text != '123Tech') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Not a valid password. Try again',
+                                  ),
+                                ),
+                              );
+                              return;
+                            }
+                            if (confirmPasswordController.text != '123Tech') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Password not matched! Try again',
+                                  ),
+                                ),
+                              );
+                              return;
+                            }
+                            Navigator.of(context).pushReplacementNamed('/home');
                           },
                         ),
                       ),
